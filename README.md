@@ -1,4 +1,6 @@
 # parenthesin/components
+[![Clojars Project](https://img.shields.io/clojars/v/com.github.parenthesin/components.svg)](https://clojars.org/com.github.parenthesin/components)
+
 Common components used on the Parenthesin's service templates.
 
 # Components
