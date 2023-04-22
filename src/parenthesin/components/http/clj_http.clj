@@ -2,22 +2,23 @@
   (:require [clj-http.client :as http]
             [clj-http.util :as http-util]
             [com.stuartsierra.component :as component]
-            [parenthesin.helpers.logs :as logs]
-            [schema.core :as s]))
+            [parenthesin.helpers.logs :as logs]))
 
-(s/defschema HttpRequestInput
-  {:url s/Str
-   :method (apply s/enum #{:get :head :post :put :delete :options :copy :move :patch})
-   s/Any s/Any})
+(defn request-fn
+  "Accepts :req which should be a map containing the following keys:
+  :url - string, containing the http address requested
+  :method - keyword, contatining one of the following options:
+    #{:get :head :post :put :delete :options :copy :move :patch}
 
-(s/defn request-fn
-  [{:keys [url] :as req} :- HttpRequestInput
-   & [respond raise]]
+  The following keys make an async HTTP request, like ring's CPS handler.
+  * :respond
+  * :raise"
+  [{:keys [url] :as req} & [respond raise]]
   (http/check-url! url)
   (if (http-util/opt req :async)
     (if (some nil? [respond raise])
       (throw (IllegalArgumentException.
-              "If :async? is true, you must pass respond and raise"))
+               "If :async? is true, you must pass respond and raise"))
       (http/request (dissoc req :respond :raise) respond raise))
     (http/request req)))
 
