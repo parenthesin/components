@@ -92,9 +92,9 @@ clj -M:clojure-lsp diagnostics
 
 ```bash
   # Build
-  clj -X:build :lib cc.delboni/helix-scratch :version '"0.1.0"'
+  clj -X:build :lib com.github.parenthesin/components :version '"0.1.0"'
   # Deploy
-  env CLOJARS_USERNAME=username CLOJARS_PASSWORD=clojars-token clj -X:deploy :lib delboni/helix-scratch :version '"0.1.0"'
+  env CLOJARS_USERNAME=username CLOJARS_PASSWORD=clojars-token clj -X:deploy :lib com.github.parenthesin/components :version '"0.1.0"'
 ```
 
 # Features
