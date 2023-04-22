@@ -92,9 +92,9 @@ clj -M:clojure-lsp diagnostics
 
 ```bash
   # Build
-  clj -X:build :lib cc.delboni/helix-scratch :version '"0.1.0"'
+  clj -X:build :lib com.github.parenthesin/components :version '"0.1.0"'
   # Deploy
-  env CLOJARS_USERNAME=username CLOJARS_PASSWORD=clojars-token clj -X:deploy :lib delboni/helix-scratch :version '"0.1.0"'
+  env CLOJARS_USERNAME=username CLOJARS_PASSWORD=clojars-token clj -X:deploy :lib com.github.parenthesin/components :version '"0.1.0"'
 ```
 
 # Features
@@ -124,7 +124,7 @@ clj -M:clojure-lsp diagnostics
 
 # License
 
-Copyright © 2023 Rafael Delboni
+Copyright © 2023 Parenthesin
 
 This is free and unencumbered software released into the public domain.
 For more information, please refer to http://unlicense.org
