@@ -1,11 +1,8 @@
 (ns unit.parenthesin.components.http.clj-http-test
-  (:require [clojure.test :refer [deftest is testing use-fixtures]]
+  (:require [clojure.test :refer [deftest is testing]]
             [com.stuartsierra.component :as component]
             [matcher-combinators.test :refer [match?]]
-            [parenthesin.components.http.clj-http :as http.clj-http]
-            [schema.test :as schema.test]))
-
-(use-fixtures :once schema.test/validate-schemas)
+            [parenthesin.components.http.clj-http :as http.clj-http]))
 
 (defn- create-and-start-system!
   [{:keys [http]}]

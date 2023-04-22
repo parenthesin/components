@@ -1,6 +1,5 @@
 (ns integration.parenthesin.util
   (:require [com.stuartsierra.component :as component]
-            [malli.dev :as dev]
             [parenthesin.helpers.logs :as logs]
             [pg-embedded-clj.core :as pg-emb]))
 
@@ -13,7 +12,6 @@
 (defn start-system!
   [components]
   (fn []
-    (dev/start!)
     (logs/setup :debug :auto)
     (pg-emb/init-pg)
     (create-and-start-components! components)))
@@ -21,5 +19,4 @@
 (defn stop-system!
   [system]
   (component/stop-system system)
-  (pg-emb/halt-pg!)
-  (dev/stop!))
+  (pg-emb/halt-pg!))
