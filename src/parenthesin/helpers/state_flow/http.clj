@@ -11,7 +11,17 @@
         (components.http/reset-responses! http)
         state-flow.api/return)))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
-(defn http-out-requests []
-  (flow "get http-out mock requests"
-    (state-flow.api/get-state (comp deref :requests :http :webserver))))
+(defn http-out-requests
+  ([]
+   (http-out-requests identity))
+  ([afn]
+   (flow "retrieves http request"
+     (state-flow.api/get-state (comp afn deref :requests :http)))))
+
+(defn request!
+  [commands]
+  (flow "makes request using http component"
+    [http (state-flow.api/get-state :http)]
+    (-> http
+        (components.http/request commands)
+        state-flow.api/return)))

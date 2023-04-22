@@ -50,13 +50,16 @@ Gets the web port from the config file [config file](test/resources/config.edn#L
 # Helpers
 
 ## [helpers/state-flow/server/pedestal](src/parenthesin/helpers/state_flow/server/pedestal.clj)
-Extract `io.pedestat.http/service-fn` frow state-flow context and calls `io.pedestat.test/response-for` to simulate and http request on the system server.
+Extract `io.pedestat.http/service-fn` from state-flow context and calls `io.pedestat.test/response-for` to simulate and http request on the system server.  
+*Check [system integration tests](./test/integration/parenthesin/schema/system_test.clj#L79) to see how to use this function.*
 
 ## [helpers/state-flow/db](src/parenthesin/helpers/state_flow/db.clj)
-Exposes function to direclty execute sql commands on the state-flow context db. 
+Exposes function to direclty execute sql commands on the state-flow context db.  
+*Check [http integration tests](test/integration/parenthesin/http/clj_http_test.clj) to see how to use these functions.*
 
 ## [helpers/state-flow/http](src/parenthesin/helpers/state_flow/http.clj)
-Exposes functions to set/get http mock state.
+Exposes functions to set/get http mock state.  
+*Check [db integration tests](test/integration/parenthesin/db/jdbc_hikari_test.clj) to see how to use these functions.*
 
 ## [helpers/logs](src/parenthesin/helpers/logs.clj)
 Setup function with preset appender and nice macro to log over `timbre/log!`
