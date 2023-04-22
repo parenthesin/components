@@ -1,4 +1,6 @@
 # parenthesin/components
+[![Clojars Project](https://img.shields.io/clojars/v/com.github.parenthesin/components.svg)](https://clojars.org/com.github.parenthesin/components)
+
 Common components used on the Parenthesin's service templates.
 
 # Components
@@ -14,6 +16,11 @@ Depends on config component to read [connection info data](test/resources/config
 ### Libraries
 - [next-jdbc](https://github.com/seancorfield/next-jdbc)
 - [hikaricp](https://github.com/brettwooldridge/HikariCP)
+### In addition, you will need to add dependencies for the JDBC drivers you wish to use for whatever databases you are using. For example:
+MySQL: mysql/mysql-connector-java {:mvn/version "8.0.19"} (search for latest version)
+PostgreSQL: org.postgresql/postgresql {:mvn/version "42.2.10"} (search for latest version)
+Microsoft SQL Server: com.microsoft.sqlserver/mssql-jdbc {:mvn/version "8.2.1.jre8"} (search for latest version)
+Sqlite: org.xerial/sqlite-jdbc {:mvn/version "3.39.2.1"} (search for latest version)
 
 ## [http/clj-http](src/parenthesin/components/http/clj_http.clj)
 Has some [mock implementations](test/unit/parenthesin/components/http/clj_http_test.clj) for tests
@@ -59,6 +66,11 @@ Function to start / stop instrumentation as `clojure.test/use-fixtures`
 ## [helpers/migrations](src/parenthesin/helpers/migrations.clj)
 Wrapper over migratus to create an CLI based API.  
 Depends on aero and jdbc to read and connect to the database.
+
+### Projects using this library
+These projects are using the library, they can be used as templates or source of documentation of how use the components.
+- [parenthesin/microservice-boilerplate](https://github.com/parenthesin/microservice-boilerplate)
+- [parenthesin/microservice-boilerplate-malli](https://github.com/parenthesin/microservice-boilerplate-malli)
 
 # Contributing
 

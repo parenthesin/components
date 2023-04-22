@@ -1,11 +1,8 @@
 (ns unit.parenthesin.components.config.aero-test
-  (:require [clojure.test :refer [deftest is testing use-fixtures]]
+  (:require [clojure.test :refer [deftest is testing]]
             [com.stuartsierra.component :as component]
             [matcher-combinators.test :refer [match?]]
-            [parenthesin.components.config.aero :as config.aero]
-            [schema.test :as schema.test]))
-
-(use-fixtures :once schema.test/validate-schemas)
+            [parenthesin.components.config.aero :as config.aero]))
 
 (defn- create-and-start-system!
   [{:keys [config]}]

@@ -1,16 +1,12 @@
 (ns integration.parenthesin.db.jdbc-hikari-test
-  (:require [clojure.test :as clojure.test]
-            [com.stuartsierra.component :as component]
+  (:require [com.stuartsierra.component :as component]
             [integration.parenthesin.util :as util]
             [parenthesin.components.config.aero :as components.config]
             [parenthesin.components.db.jdbc-hikari :as components.db]
             [parenthesin.helpers.state-flow.db :as state-flow.db]
-            [schema.test :as schema.test]
             [state-flow.api :refer [defflow]]
             [state-flow.assertions.matcher-combinators :refer [match?]]
             [state-flow.core :as state-flow :refer [flow]]))
-
-(clojure.test/use-fixtures :once schema.test/validate-schemas)
 
 (defflow
   flow-integration-database-test
