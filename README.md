@@ -3,36 +3,36 @@ Common components used on the Parenthesin's service templates.
 
 # Components
 
-## [str/parenthesin/components/config/aero.clj](config/aero)
+## [config/aero](str/parenthesin/components/config/aero.clj)
 Reads aero config file on `resources/config.edn`.  
 Gets the current [profile](https://github.com/juxt/aero#profile) on enviroment var `SYSTEM_ENV`
 ### Libraries
 - [aero](https://github.com/juxt/aero)
 
-## [str/parenthesin/components/db/jdbc_hikari.clj](db/jdbc-hikari)
+## [db/jdbc-hikari](str/parenthesin/components/db/jdbc_hikari.clj)
 Depends on config component to read [connection info data](test/resources/config.edn#L3)
 ### Libraries
 - [next-jdbc](https://github.com/seancorfield/next-jdbc)
 - [hikaricp](https://github.com/brettwooldridge/HikariCP)
 
-## [str/parenthesin/components/http/clj-http.clj](http/clj-http)
+## [http/clj-http](str/parenthesin/components/http/clj-http.clj)
 Has some [mock implementations](test/unit/parenthesin/components/http/clj_http_test.clj) for tests
 ### Libraries
 - [clj-http](https://github.com/dakrone/clj-http)
 
-## [str/parenthesin/components/router/reitit_malli.clj](router/reitit-malli)
+## [router/reitit-malli](str/parenthesin/components/router/reitit_malli.clj)
 Has some presets, handlers and configs to use malli as input/output validations for routes
 ### Libraries
 - [reitit](https://github.com/metosin/reitit)
 - [malli](https://github.com/metosin/malli)
 
-## [str/parenthesin/components/router/reitit_malli.clj](router/reitit-malli)
+## [router/reitit-schema](str/parenthesin/components/router/reitit_schema.clj)
 Has some presets, handlers and configs to use schema as input/output validations for routes
 ### Libraries
 - [reitit](https://github.com/metosin/reitit)
 - [schema](https://github.com/plumatic/schema)
 
-## [str/parenthesin/components/server/reitit_pedestal_jetty.clj](server/reitit-pedestal-jetty)
+## [server/reitit-pedestal-jetty](str/parenthesin/components/server/reitit_pedestal_jetty.clj)
 Depends on one of each type of the components [config, db, http, router] and starts a webserver with all components injected in the http context.  
 Gets the web port from the config file [config file](test/resources/config.edn#L3) or the enviroment var `PORT`
 ### Libraries
@@ -41,22 +41,22 @@ Gets the web port from the config file [config file](test/resources/config.edn#L
 
 # Helpers
 
-## [str/parenthesin/helpers/state_flow/server/pedestal.clj](helpers/state-flow/server/pedestal)
+## [helpers/state-flow/server/pedestal](str/parenthesin/helpers/state_flow/server/pedestal.clj)
 Extract `io.pedestat.http/service-fn` frow state-flow context and calls `io.pedestat.test/response-for` to simulate and http request on the system server.
 
-## [str/parenthesin/helpers/state_flow/db.clj](helpers/state-flow/db)
+## [helpers/state-flow/db](str/parenthesin/helpers/state_flow/db.clj)
 Exposes function to direclty execute sql commands on the state-flow context db. 
 
-## [str/parenthesin/helpers/state_flow/http.clj](helpers/state-flow/http)
+## [helpers/state-flow/http](str/parenthesin/helpers/state_flow/http.clj)
 Exposes functions to set/get http mock state.
 
-## [str/parenthesin/helpers/logs.clj](helpers/logs)
+## [helpers/logs](str/parenthesin/helpers/logs.clj)
 Setup function with preset appender and nice macro to log over `timbre/log!`
 
-## [str/parenthesin/helpers/malli.clj](helpers/malli)
+## [helpers/malli](str/parenthesin/helpers/malli.clj)
 Function to start / stop instrumentation as `clojure.test/use-fixtures`
 
-## [str/parenthesin/helpers/malli.clj](helpers/malli)
+## [helpers/migrations](str/parenthesin/helpers/migrations.clj)
 Wrapper over migratus to create an CLI based API.  
 Depends on aero and jdbc to read and connect to the database.
 
