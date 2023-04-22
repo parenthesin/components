@@ -15,7 +15,7 @@ Depends on config component to read [connection info data](test/resources/config
 - [next-jdbc](https://github.com/seancorfield/next-jdbc)
 - [hikaricp](https://github.com/brettwooldridge/HikariCP)
 
-## [http/clj-http](src/parenthesin/components/http/clj-http.clj)
+## [http/clj-http](src/parenthesin/components/http/clj_http.clj)
 Has some [mock implementations](test/unit/parenthesin/components/http/clj_http_test.clj) for tests
 ### Libraries
 - [clj-http](https://github.com/dakrone/clj-http)
