@@ -67,6 +67,11 @@ Function to start / stop instrumentation as `clojure.test/use-fixtures`
 Wrapper over migratus to create an CLI based API.  
 Depends on aero and jdbc to read and connect to the database.
 
+### Projects using this library
+These projects are using the library, they can be used as templates or source of documentation of how use the components.
+- [parenthesin/microservice-boilerplate](https://github.com/parenthesin/microservice-boilerplate)
+- [parenthesin/microservice-boilerplate-malli](https://github.com/parenthesin/microservice-boilerplate-malli)
+
 # Contributing
 
 ## Tests
