@@ -18,7 +18,7 @@
   (if (http-util/opt req :async)
     (if (some nil? [respond raise])
       (throw (IllegalArgumentException.
-               "If :async? is true, you must pass respond and raise"))
+              "If :async? is true, you must pass respond and raise"))
       (http/request (dissoc req :respond :raise) respond raise))
     (http/request req)))
 
