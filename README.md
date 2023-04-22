@@ -124,7 +124,7 @@ clj -M:clojure-lsp diagnostics
 
 # License
 
-Copyright © 2023 Rafael Delboni
+Copyright © 2023 Parenthesin
 
 This is free and unencumbered software released into the public domain.
 For more information, please refer to http://unlicense.org
