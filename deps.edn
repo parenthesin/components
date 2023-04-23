@@ -36,7 +36,7 @@
   :nrepl {:extra-deps {cider/cider-nrepl {:mvn/version "0.30.0"}}
           :main-opts ["-m" "nrepl.cmdline" "--middleware" "[cider.nrepl/cider-middleware]"]}
 
-  :build {:deps {io.github.clojure/tools.build {:git/tag "v0.9.4" :git/sha "76b78fe"}
+  :build {:deps {io.github.clojure/tools.build {:mvn/version "0.9.4"}
                  slipset/deps-deploy {:mvn/version "0.2.1"}}
           :ns-default build
           :exec-args {:jar-file "target/components.jar"}}}}

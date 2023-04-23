@@ -55,11 +55,11 @@ Extract `io.pedestat.http/service-fn` from state-flow context and calls `io.pede
 
 ## [helpers/state-flow/db](src/parenthesin/helpers/state_flow/db.clj)
 Exposes function to direclty execute sql commands on the state-flow context db.  
-*Check [http integration tests](test/integration/parenthesin/http/clj_http_test.clj) to see how to use these functions.*
+*Check [db integration tests](test/integration/parenthesin/db/jdbc_hikari_test.clj) to see how to use these functions.*
 
 ## [helpers/state-flow/http](src/parenthesin/helpers/state_flow/http.clj)
 Exposes functions to set/get http mock state.  
-*Check [db integration tests](test/integration/parenthesin/db/jdbc_hikari_test.clj) to see how to use these functions.*
+*Check [http integration tests](test/integration/parenthesin/http/clj_http_test.clj) to see how to use these functions.*
 
 ## [helpers/logs](src/parenthesin/helpers/logs.clj)
 Setup function with preset appender and nice macro to log over `timbre/log!`
@@ -127,7 +127,6 @@ clj -M:clojure-lsp diagnostics
 - [timbre](https://github.com/ptaoussanis/timbre) Logging library
 - [next-jdbc](https://github.com/seancorfield/next-jdbc) JDBC-based layer to access databases
 - [hikaricp](https://github.com/brettwooldridge/HikariCP) A solid, high-performance, JDBC connection pool at last
-- [honeysql](https://github.com/seancorfield/honeysql) SQL as Clojure data structures
 - [tools.build](https://github.com/clojure/tools.build) Clojure builds as Clojure programs 
 - [deps-deploy](https://github.com/slipset/deps-deploy) A Clojure library to deploy your stuff to clojars
 
