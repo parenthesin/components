@@ -4,7 +4,7 @@
             [deps-deploy.deps-deploy :as dd]))
 
 (def default-lib 'com.github.parenthesin/components)
-(def default-version "0.0.0-SNAPSHOT")
+(def default-version "0.0.1-SNAPSHOT")
 (def class-dir "target/classes")
 
 (defn- jar-opts
@@ -39,6 +39,6 @@
   (let [{:keys [jar-file version] :as opts} (jar-opts opts)
         artifact (b/resolve-path jar-file)
         pom-file (b/pom-path (select-keys opts [:lib :class-dir]))]
-    (println "\nDeploying JAR " artifact "for pom" pom-file "on version" version)
+    (println "\nDeploying JAR" artifact "for pom" pom-file "on version" version)
     (dd/deploy {:installer :remote :artifact artifact :pom-file pom-file}))
   opts)
