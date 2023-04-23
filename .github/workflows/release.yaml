@@ -40,10 +40,10 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Build Jar
-        run: clojure -X:build :lib com.github.parenthesin/components :version \"${VERSION}\"
+        run: clojure -T:build jar :version \"${VERSION}\"
 
       - name: Deploy on clojars
-        run: clojure -X:deploy :lib com.github.parenthesin/components :version \"${VERSION}\"
+        run: clojure -T:build deploy :version \"${VERSION}\"
         env:
           CLOJARS_USERNAME: ${{ vars.CLOJARS_USERNAME }}
           CLOJARS_PASSWORD: ${{ secrets.CLOJARS_PASSWORD }}
