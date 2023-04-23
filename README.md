@@ -108,15 +108,16 @@ clj -M:clojure-lsp diagnostics
 
 ```bash
   # Build
-  clj -X:build :lib com.github.parenthesin/components :version '"0.1.0"'
+  clojure -T:build jar :version '"0.1.0"'
   # Deploy
-  env CLOJARS_USERNAME=username CLOJARS_PASSWORD=clojars-token clj -X:deploy :lib com.github.parenthesin/components :version '"0.1.0"'
+  env CLOJARS_USERNAME=username CLOJARS_PASSWORD=clojars-token clojure -T:build deploy :version '"0.1.0"'
 ```
 
 # Features
 
 ## System
 - [schema](https://github.com/plumatic/schema) Types and Schemas
+- [malli](https://github.com/metosin/malli) High-performance Data-Driven Data Specification Library for Clojure/Script. 
 - [component](https://github.com/stuartsierra/component) System Lifecycle and Dependencies
 - [pedestal](https://github.com/pedestal/pedestal) Http Server
 - [reitit](https://github.com/metosin/reitit) Http Routes System 
@@ -127,7 +128,8 @@ clj -M:clojure-lsp diagnostics
 - [next-jdbc](https://github.com/seancorfield/next-jdbc) JDBC-based layer to access databases
 - [hikaricp](https://github.com/brettwooldridge/HikariCP) A solid, high-performance, JDBC connection pool at last
 - [honeysql](https://github.com/seancorfield/honeysql) SQL as Clojure data structures
-- [depstar](https://github.com/seancorfield/depstar) Generates Uberjars for releases
+- [tools.build](https://github.com/clojure/tools.build) Clojure builds as Clojure programs 
+- [deps-deploy](https://github.com/slipset/deps-deploy) A Clojure library to deploy your stuff to clojars
 
 ## Tests & Checks
 - [kaocha](https://github.com/lambdaisland/kaocha) Test runner
