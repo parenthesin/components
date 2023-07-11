@@ -17,10 +17,10 @@ Depends on config component to read [connection info data](test/resources/config
 - [next-jdbc](https://github.com/seancorfield/next-jdbc)
 - [hikaricp](https://github.com/brettwooldridge/HikariCP)
 ### In addition, you will need to add dependencies for the JDBC drivers you wish to use for whatever databases you are using. For example:
-MySQL: `mysql/mysql-connector-java {:mvn/version "8.0.19"}`  
-PostgreSQL: `org.postgresql/postgresql {:mvn/version "42.2.10"}`  
-Microsoft SQL Server: `com.microsoft.sqlserver/mssql-jdbc {:mvn/version "8.2.1.jre8"}`  
-Sqlite: `org.xerial/sqlite-jdbc {:mvn/version "3.39.2.1"}`  
+MySQL: *com.mysql/mysql-connector-j {:mvn/version "[latest-version](https://mvnrepository.com/artifact/com.mysql/mysql-connector-j)"}*  
+PostgreSQL: *org.postgresql/postgresql {:mvn/version "[latest-version](https://mvnrepository.com/artifact/org.postgresql/postgresql)"}*  
+Microsoft SQL Server: *com.microsoft.sqlserver/mssql-jdbc {:mvn/version "[latest-version](https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc)"}*  
+Sqlite: *org.xerial/sqlite-jdbc {:mvn/version "[latest-version](https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc)"}*  
 **(always search for latest version)**
 
 ## [http/clj-http](src/parenthesin/components/http/clj_http.clj)
