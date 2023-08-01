@@ -6,7 +6,8 @@
   (:import (com.zaxxer.hikari HikariDataSource)))
 
 (defprotocol DatabaseProvider
-  (execute [self command]
+  (execute [self sql-params]
+    [self sql-params opts]
     "Low-level API to execute a command in the database"))
 
 (defrecord Database [config ^HikariDataSource datasource]
@@ -26,8 +27,10 @@
       this))
 
   DatabaseProvider
-  (execute [this commands]
-    (jdbc/execute! (:datasource this) commands)))
+  (execute [this sql-params]
+    (jdbc/execute! (:datasource this) sql-params))
+  (execute [this sql-params opts]
+    (jdbc/execute! (:datasource this) sql-params opts)))
 
 (defn new-database []
   (map->Database {}))
