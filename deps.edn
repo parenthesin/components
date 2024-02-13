@@ -17,7 +17,7 @@
         metosin/reitit-swagger {:mvn/version "0.6.0"}
         metosin/reitit-swagger-ui {:mvn/version "0.6.0"}
         migratus/migratus {:mvn/version "1.5.4"}
-        org.slf4j/slf4j-simple {:mvn/version "2.0.11"}
+        org.slf4j/slf4j-simple {:mvn/version "2.0.12"}
         prismatic/schema {:mvn/version "1.4.1"}}
 
  :aliases
@@ -26,11 +26,11 @@
                        org.clojars.bigsy/pg-embedded-clj {:mvn/version "1.0.1"}
                        lambdaisland/kaocha {:mvn/version "1.87.1366"}
                        lambdaisland/kaocha-cloverage {:mvn/version "1.1.89"}
-                       nubank/matcher-combinators {:mvn/version "3.8.8"}
+                       nubank/matcher-combinators {:mvn/version "3.9.1"}
                        nubank/state-flow {:mvn/version "5.14.5"}}
          :main-opts   ["-m" "kaocha.runner"]}
 
-  :clojure-lsp {:replace-deps {com.github.clojure-lsp/clojure-lsp-standalone {:mvn/version "2023.12.29-12.09.27"}}
+  :clojure-lsp {:replace-deps {com.github.clojure-lsp/clojure-lsp-standalone {:mvn/version "2024.02.01-11.01.59"}}
                 :main-opts ["-m" "clojure-lsp.main"]}
 
   :nrepl {:extra-deps {cider/cider-nrepl {:mvn/version "0.45.0"}}
