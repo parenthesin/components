@@ -4,16 +4,22 @@
             [parenthesin.components.config.aero :as config.aero])
   (:gen-class))
 
-(defn get-connection []
-  (let [{:keys [username] :as db} (-> (config.aero/read-config {}) :database)]
-    (jdbc/get-connection (assoc db :user username))))
+(defn get-connection
+  ([]
+   (get-connection {}))
+  ([input-map]
+   (let [{:keys [username] :as db} (-> (config.aero/read-config input-map) :database)]
+     (jdbc/get-connection (assoc db :user username)))))
 
 (def configuration
   {:store         :database
    :migration-dir "migrations/"})
 
-(defn configuration-with-db []
-  (assoc configuration :db {:connection (get-connection)}))
+(defn configuration-with-db
+  ([]
+   (configuration-with-db {}))
+  ([input-map]
+   (assoc configuration :db {:connection (get-connection input-map)})))
 
 (defn init
   [config]

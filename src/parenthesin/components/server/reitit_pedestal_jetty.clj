@@ -55,7 +55,7 @@
       (server/default-interceptors)
       (pedestal/replace-last-interceptor router)))
 
-(defrecord WebServer [config router]
+(defrecord WebServer [service-map config router]
   component/Lifecycle
   (start [this]
     (let [{:webserver/keys [port allowed-origins]
@@ -65,6 +65,7 @@
       (assoc this :webserver
              (-> (base-service port allowed-origins)
                  (init-fn (:router router))
+                 (merge service-map)
                  (system-interceptors this)
                  (server/create-server)
                  (server/start)))))
@@ -75,6 +76,8 @@
     (dissoc this :webserver)
     this))
 
-(defn new-webserver []
-  (map->WebServer {}))
-
+(defn new-webserver
+  ([]
+   (new-webserver {}))
+  ([service-map]
+   (map->WebServer {:service-map service-map})))
