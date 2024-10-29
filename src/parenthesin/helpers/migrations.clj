@@ -1,6 +1,7 @@
 (ns parenthesin.helpers.migrations
   (:require [migratus.core :as migratus]
             [next.jdbc :as jdbc]
+            [next.jdbc.connection :as connection]
             [parenthesin.components.config.aero :as config.aero])
   (:gen-class))
 
@@ -8,8 +9,9 @@
   ([]
    (get-connection {}))
   ([input-map]
-   (let [{:keys [username] :as db} (-> (config.aero/read-config input-map) :database)]
-     (jdbc/get-connection (assoc db :user username)))))
+   (let [{:keys [username] :as db-spec} (-> (config.aero/read-config input-map) :database)
+         jdbc-url (connection/jdbc-url (assoc db-spec :user username))]
+     (jdbc/get-connection {:jdbcUrl jdbc-url}))))
 
 (def configuration
   {:store         :database
