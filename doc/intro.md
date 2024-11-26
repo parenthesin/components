@@ -61,4 +61,65 @@ Every time that you want to implement a new component, you will be implementing 
 
 Well, by default Component uses records instead of classical maps and that's why you use a function named `map->YourComponent` to access a map of properties of your component. You can see more about Records by reaching [defrecord](https://docs.clj.codes/org.clojure/clojure/clojure.core/defrecord/0) and see implementation examples.
 
-If you don't like the primary idea of using records, you can check out some Component alternatives like [Integrant](https://github.com/weavejester/integrant) and [mount](https://github.com/tolitius/mount) and compare with Component to see general differences.
+Suppose you don't like the primary idea of using records. In that case, you can check out some Component alternatives, like [Integrant](https://github.com/weavejester/integrant) and [mount](https://github.com/tolitius/mount), and compare them with Component to see the general differences.
+
+## Mocking components
+Sometimes, creating a mock can be helpful with integration tests, so by default, this approach of using records and implementing some protocols can be useful for such cases. Let's dive deep into an example of our HTTP component.
+
+Inside our components, we have an [HTTP component](https://github.com/parenthesin/components/blob/main/src/parenthesin/components/http/clj_http.clj) using [clj-http](https://github.com/dakrone/clj-http). To manage our tests, it's helpful to configure both an HTTP component to make real requests to the external world and an internal component to mock these requests and make our tests faster and more reliable.
+
+First of all, we've to define a simple protocol for an HTTP provider that manages a request, like this one:
+```clojure
+(defprotocol HttpProvider
+  (request
+    [self request-input]))
+```
+And now, we can implement it for both cases! Look at the example below:
+```clojure
+(defrecord Http [_]
+  component/Lifecycle
+  (start [this] this)
+  (stop  [this] this)
+
+  HttpProvider
+  (request
+    [_self {:keys [method url] :as request-input}]
+    (logs/log :info :http-out-message :method method :url url)
+    (let [start-time (System/currentTimeMillis)
+          {:keys [status] :as response} (request-fn request-input)
+          end-time (System/currentTimeMillis)
+          total-time (- end-time start-time)]
+      (logs/log :info :http-out-message-response :response-time-millis total-time
+                :status status)
+      response)))
+
+(defn new-http [] (map->Http {}))
+```
+Then, we have a component for HTTP that can handle requests and log them. But now imagine that we have to implement some similar component to handle our mock, but also implementing the `HttpProvider` protocol... How can we do it?
+```clojure
+(defrecord HttpMock [responses requests]
+  component/Lifecycle
+  (start [this] this)
+  (stop  [this] this)
+
+  HttpProvider
+  (request
+    [_self {:keys [url] :as req}]
+    (swap! requests merge
+           (assoc req :instant (System/currentTimeMillis)))
+    (get-in @responses
+            [url]
+            {:status 500
+             :body "Response not set in mocks!"})))
+
+(defn new-http-mock
+  [mocked-responses]
+  (map->HttpMock {:responses (atom mocked-responses)
+                  :requests (atom [])}))
+```
+*Voilà*! Now we have both components for HTTP implementing the same protocol and handling our interactions depending on our usage. By default, you can see this example running at the integration tests from [microservice-boilerplate](https://github.com/parenthesin/microservice-boilerplate/blob/main/test/integration/microservice_boilerplate/wallet_test.clj#L25).
+
+## How to use it?
+Well, now you have a full introduction to the *Component* structure. Now, we can deep dive into each component and understand its usability based on some examples! Check out:
+- [Components](components.md)
+- [Helpers](helpers.md)
