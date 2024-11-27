@@ -139,6 +139,11 @@ clj -M:clojure-lsp diagnostics
 - [pg-embedded-clj](https://github.com/Bigsy/pg-embedded-clj) Embedded PostgreSQL for integration tests
 - [clojure-lsp](https://github.com/clojure-lsp/clojure-lsp/) Code Format, Namespace Check and Diagnosis
 
+# Documentation
+
+If you want to know more about the components in general and each component or helper implementation, check the [documentation](docs/intro.md).
+Contributions and suggestions are welcome.
+
 # License
 
 Copyright © 2023 Parenthesin
