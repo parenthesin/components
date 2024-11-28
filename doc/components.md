@@ -218,4 +218,4 @@ And now to start completely your system you can define a function:
 
 And that's it! Now you can properly understand the base of each component - opening possibilities to start building your Clojure services! Open a parentheses and deep dive into this world.
 
-If you want, you can check more about some [helpers](docs/helpers.md) (like the logs helper mentioned above)!
+If you want, you can check more about some [helpers](doc/helpers.md) (like the logs helper mentioned above)!
