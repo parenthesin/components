@@ -141,7 +141,7 @@ clj -M:clojure-lsp diagnostics
 
 # Documentation
 
-If you want to know more about the components in general and each component or helper implementation, check the [documentation](docs/intro.md).
+If you want to know more about the components in general and each component or helper implementation, check the [documentation](doc/intro.md).
 Contributions and suggestions are welcome.
 
 # License
