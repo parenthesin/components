@@ -1,6 +1,6 @@
 # Components
 
-This document aims to provide you with a full introduction and usage example of each component implemented here. Let's start with it!
+This document provides a full introduction and usage example of each component implemented here. Let's start with it!
 
 ## config/aero
 This component is responsible for reading and parsing configuration files from our environment based on a `resources/config.edn` file or getting the current [profile](https://github.com/juxt/aero#profile) on environment var `SYSTEM_ENV`. The used library is defined as `A small library for explicit, intentful configuration` and you can configure multiple environment variables for each specific usage.
