@@ -111,4 +111,4 @@ You can also use some CLI commands like `clj -M:migratus create migration-name`,
 
 And that's it! Now you can use some helpers also implemented here in `parenthesin/components`! Hope this was helpful and see you next time!
 
-Go [back to main page](doc/intro.md).
+Go [back to main page](intro.md).
