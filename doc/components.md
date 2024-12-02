@@ -27,7 +27,18 @@ To start our component we can start building our system map:
 ```
 > It's normal to see this component as the first one on the system map because it will start with every configuration that comes from our environment.
 
-The `dev` profile is the default for `SYSTEM_ENV`, so if you want to set up another profile you can define your `SYSTEM_ENV` to a new value and a new environment will be configured.
+The `dev` profile is the default for `SYSTEM_ENV`, so if you want to set up another profile you can define your `SYSTEM_ENV` to a new value and a new environment will be configured. For example, if we want to use and redefine `:port` for each specific profile, we can implement something like:
+```clojure
+{:webserver/port #profile {:default 3001
+                           :dev     8001
+                           :test    8002}}
+```
+
+Then, to specify a port you can use:
+```clojure
+(read-config "config.edn" {:profile :dev})
+```
+> Be free to use any profile that you want! This is helpful to manage custom environments.
 
 ## db/jdbc-hikari
 To set up our database that's the component that we use (and it depends on your [connection info data](https://github.com/parenthesin/components/blob/main/test/resources/config.edn#L3) previously configured). This component is using two main libraries to manage our database: [next-jdbc](https://github.com/seancorfield/next-jdbc) and [HikariCP](https://github.com/brettwooldridge/HikariCP).
