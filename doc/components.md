@@ -68,6 +68,8 @@ You can build your system map using this component after a `config/aero` load (i
 
 To run any query you can follow the example above for `honeysql` where you can build an SQL query and execute it with `components.database/execute` function from [parenthesin.components.db.jdbc-hikari](https://github.com/parenthesin/components/blob/main/src/parenthesin/components/db/jdbc_hikari.clj).
 
+You can also prepare your integration test environment to use this component with [pg-embedded-clj](https://github.com/Bigsy/pg-embedded-clj), a Clojure library that provides embedded PostgreSQL for testing and development purposes. You can see this [example](https://github.com/parenthesin/components/blob/main/test/integration/parenthesin/util.clj#L16) of usage for system initialization to start your database. Check [state-flow.db helper](helpers.md#db) to understand how to use it with your integration tests.
+
 ## http/clj-http
 To provide an HTTP client, that's the right component, using [clj-http](https://github.com/dakrone/clj-http) as the main library defined as *an idiomatic clojure http client wrapping the [apache client](https://hc.apache.org/)*. The implementation of this component is divided into two main options: an `Http` component that handles real requests and an `HttpMock` component to help you build some integration tests easily, mocking your requests.
 
