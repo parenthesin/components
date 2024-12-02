@@ -48,6 +48,8 @@ This API is based on using qualified keywords and transducers having a friendly 
      (components.database/execute db))
 ```
 
+We're also using [jdbc-url](https://github.com/parenthesin/components/blob/main/src/parenthesin/components/db/jdbc_hikari.clj#L17) to build up the connection string and the database configuration map, supporting multiple extra keys if you want to pass them or configure them yourself. That means you can also provide additional data into your `:database` configuration map in your `resources/config.edn` and that will be used! An example of usage is with [useSSL](https://github.com/clj-codes/docs.backend/blob/main/resources/config.edn#L12) - specific for PostgreSQL configuration with SSL. If you want to customize your `db-spec` hash-map there's also great [documentation for next-jdbc](https://github.com/seancorfield/next-jdbc/blob/develop/doc/getting-started.md#the-db-spec-hash-map).
+
 ### HikariCP
 Described as *a solid, high-performance, JDBC connection pool at last*, HikariCP manages our connection pool provided by our configuration previously, being a very light library for its amazing usage (at roughly 165Kb). You can check more about these optimizations [here](https://github.com/brettwooldridge/HikariCP/wiki/Down-the-Rabbit-Hole).
 
