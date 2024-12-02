@@ -1,10 +1,6 @@
 {:cljdoc.doc/tree
  [["Readme" {:file "README.md"}]
   ; ["Changes" {:file "CHANGELOG.md"}] ;; todo
-  ["Intro" {:file "doc/intro.md"}
-   ["Component" {:file "doc/intro.md#component"}]
-   ["Mocking components" {:file "doc/intro.md#mocking-components"}]
-   ["How to use it?" {:file "doc/intro.md#how-to-use-it"}]]
-  ["Helpers" {:file "doc/helpers.md"}
-   ["state-flow" {:file "doc/helpers.md#state-flow"}]]
-  ["Differences from 1.x" {:file "doc/differences-from-1-x.md"}]]}
+  ["Intro" {:file "doc/intro.md"}]
+  ["Components" {:file "doc/components.md"}]
+  ["Helpers" {:file "doc/helpers.md"}]]}
