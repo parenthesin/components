@@ -44,7 +44,7 @@ This change log follows the conventions of [keepachangelog.com](http://keepachan
 
 ### Requirements
 
-You Java and Clojure installed in your machine.
+You need Java (JDK 21+) and Clojure (v1.12.0+) installed in your machine.
 
 ### Clone repository
 
