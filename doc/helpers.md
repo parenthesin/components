@@ -8,7 +8,7 @@ Integration tests are really important in our development cycle, so this helper 
 ### server/pedestal
 The goal of this helper is to extract `io.pedestal.http/service-fn` from `state-flow` context and call `io.pedestal.test/response-for` to simulate HTTP requests.
 
-This helper implements a `request!` function that receives a map with `method`, `uri`, `body` and `headers` (same for composing a request in pedestal) and starts a flow that *makes* an HTTP request and parses the response. You can see an example of this example [here](https://github.com/parenthesin/components/blob/main/test/integration/parenthesin/schema/system_test.clj#L79) and the context down below:
+This helper implements a `request!` function that receives a map with `method`, `uri`, `body`, and `headers` (same for composing a request in pedestal) and starts a flow that *makes* an HTTP request and parses the response. You can see an example of this example [here](https://github.com/parenthesin/components/blob/main/test/integration/parenthesin/schema/system_test.clj#L79) and the context down below:
 ```clojure
 ;; inside your test
 ;; don't forget to import corretly the libraries
@@ -21,45 +21,7 @@ This helper implements a `request!` function that receives a map with `method`, 
 ```
 > This example also uses the [matchers-combinators](https://github.com/nubank/matcher-combinators/) library to validate integration tests.
 
-By default this implementation is for `request!` it's fully prepared to do all HTTP client functionalities, like handling multipart uploads. An example of this implementation can be seen below:
-```clojure
-["/files" {:swagger {:tags ["files"]}}
-    ["/upload"
-     {:post {:summary    "upload a file"
-             :parameters {:multipart [:map-of :string [:or :string malli/temp-file-part]]}
-             :responses  {200 {:body :any}}
-             :handler    (fn [{{multipart :multipart} :parameters}]
-                           {:status 200
-                            :body   {:multipart multipart}})}}]]
-```
-
-We start defining a reitit route for `post` that have a multipart parameter received. This parameter can be easily handled using a wrapper function like:
-```clojure
-(defn request!
-  [{:keys [uri body multipart] :as opts}]
-  (flow "makes http request"
-    (-> (cond-> opts
-          body (assoc :form-params body)
-          (not multipart) (assoc :content-type :json))
-        (assoc :as :json
-               :url (str "http://localhost:3001" uri))
-        clj-http.client/request
-        state-flow.api/return)))
-```
-> The idea here is to perform different scenarios if we have to deal with multipart parameters, handling `clj-http` requests, and returning a state-flow monad for specific usage.
-
-And then if you want to use it in a flow you can simply implement it like that:
-```clojure
-;; inside a flow!
-(request! {:uri "/files/upload"
-           :as :json
-           :method :post
-           :multipart [{:name "fiale" :content "Eggplants"}
-                       {:name "file.jpg" :content (clojure.java.io/file "/Users/rafael.delboni/Downloads/images.jpg")}
-                       {:name "file.csv" :content (clojure.java.io/file "/Users/rafael.delboni/Downloads/file.csv")}]})
-```
-> In this example, we're handling multipart as some different files loaded from our disk, so remember to have these files correctly loaded!
-
+By default this implementation for `request!` isn't fully prepared to do all HTTP client functionalities. You can see an [implementation example below](#http) for multipart uploads.
 ### db
 This helper exposes a function to directly execute SQL commands on the `state-flow` context database called `execute!`. An example of this implementation is provided [here](https://github.com/parenthesin/components/blob/main/test/integration/parenthesin/db/jdbc_hikari_test.clj) and an example of usage is:
 ```clojure
@@ -99,6 +61,45 @@ This helper exposes some functions to set and get an HTTP mock state with `set-h
                                        :url "https://goosegoosego.com"})))))
 ```
 > This example set a mock for `http-out-request` to validate a request.
+
+In the above example we saw how we can make simple HTTP requests and mock some responses easily, but handling some HTTP client functionalities - like handling multipart upload - can be a little different and needs some custom implementation. Look at the example below:
+```clojure
+(defn request!
+  [{:keys [uri body multipart] :as opts}]
+  (flow "makes http request"
+    (-> (cond-> opts
+          body (assoc :form-params body)
+          (not multipart) (assoc :content-type :json))
+        (assoc :as :json
+               :url (str "http://localhost:3001" uri))
+        clj-http.client/request
+        state-flow.api/return)))
+```
+> The same `request!` but with a new validation.  The idea here is to perform different scenarios if we have to deal with multipart parameters, handling `clj-http` requests, and returning a state-flow monad for specific usage.
+
+You can see below an example of the implementation of a multipart parameter route for reitit. There we define which elements we can receive, and handle.
+```clojure
+["/files" {:swagger {:tags ["files"]}}
+    ["/upload"
+     {:post {:summary    "upload a file"
+             :parameters {:multipart [:map-of :string [:or :string malli/temp-file-part]]}
+             :responses  {200 {:body :any}}
+             :handler    (fn [{{multipart :multipart} :parameters}]
+                           {:status 200
+                            :body   {:multipart multipart}})}}]]
+```
+
+And then if you want to use it in a flow you can simply implement it like that:
+```clojure
+;; inside a flow!
+(request! {:uri "/files/upload"
+                       :as :json
+                       :method :post
+                       :multipart [{:name "fiale" :content "Eggplants"}
+                                   {:name "file.jpg" :content (clojure.java.io/file "/Users/rafael.delboni/Downloads/images.jpg")}
+                                   {:name "file.csv" :content (clojure.java.io/file "/Users/rafael.delboni/Downloads/file.csv")}]})
+```
+> In this example, we're handling multipart as some different files loaded from our disk, so remember to have these files correctly loaded!
 
 ## logs
 Logging is essential to all services, so `components` also implement a helper for logs! This helper uses [timbre](https://github.com/taoensso/timbre), a pure Clojure/Script logging library to provide logging in general with an easy-to-configure interface with pure Clojure data (and that just works).

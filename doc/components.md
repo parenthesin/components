@@ -104,6 +104,8 @@ An example of usage for this component is:
 ```
 > Then you can easily make general requests and parse these results as you want!
 
+By default, this component isn't fully prepared to do all HTTP client functionalities. To understand this better and see an example of the reimplementation of this `request` function for test validation check [here](helpers.md#http).
+
 ## routers
 We've two implementations of `routers`, and both perform a spec/schema validation for your requests to improve your development in general. As you know, type hints and type inference in Clojure are optional, but we also highly recommend it to provide production-ready code!
 
