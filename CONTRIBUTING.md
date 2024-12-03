@@ -36,6 +36,10 @@ reasons:
   this code isn't here anymore, when clicking on them.
 - Your PR will be squashed anyway.
 
+### Change log
+All notable changes to this project will be documented in [CHANGELOG.md](CHANGELOG.md).
+This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
+
 ## Developing
 
 ### Requirements
