@@ -39,7 +39,7 @@ This helper exposes a function to directly execute SQL commands on the `state-fl
 ```
 
 ### http
-This helper exposes some functions to set and get an HTTP mock state with `set-http-out--responses!` that receive some responses for mocking, `http-out-requests` to retrieve some HTTP request and `request!` to make an HTTP request based on an HTTP state. You can see an example of implementation [here](https://github.com/parenthesin/components/blob/main/test/integration/parenthesin/http/clj_http_test.clj) and down below:
+This helper exposes some functions to set and get an HTTP mock state with `set-http-out-responses!` that receive some responses for mocking, `http-out-requests` to retrieve some HTTP request and `request!` to make an HTTP request based on an HTTP state. You can see an example of implementation [here](https://github.com/parenthesin/components/blob/main/test/integration/parenthesin/http/clj_http_test.clj) and down below:
 ```clojure
 
 (defflow flow-integration-database-test
@@ -62,9 +62,9 @@ This helper exposes some functions to set and get an HTTP mock state with `set-h
 ```
 > This example set a mock for `http-out-request` to validate a request.
 
-In the above example we saw how we can make simple HTTP requests and mock some responses easily, but handling some HTTP client functionalities - like handling multipart upload - can be a little different and needs some custom implementation. Look at the example below:
+In the above example we saw how we can make simple HTTP requests and mock some responses easily, but handling some more complex HTTP client functionalities - like handling multipart upload - can be a little different and we recomend an custom wrapper over [clj-http](https://github.com/dakrone/clj-http) implementation. Look at the example below:
 ```clojure
-(defn request!
+(defn clj-http-request!
   [{:keys [uri body multipart] :as opts}]
   (flow "makes http request"
     (-> (cond-> opts
@@ -75,10 +75,13 @@ In the above example we saw how we can make simple HTTP requests and mock some r
         clj-http.client/request
         state-flow.api/return)))
 ```
-> The same `request!` but with a new validation.  The idea here is to perform different scenarios if we have to deal with multipart parameters, handling `clj-http` requests, and returning a state-flow monad for specific usage.
+> This implementation has the same interface of the `request!` in our helpers, but using `clj-http` behind the scenes, this will grant you an fully fledged http client for your integrations tests, but that still uses the components and mocks.
+
+The following here is showing how to deal with multipart upload parameters, handling `http` requests, and returning a state-flow monad for specific usage.
 
 You can see below an example of the implementation of a multipart parameter route for reitit. There we define which elements we can receive, and handle.
 ```clojure
+; example of a reitit route configuration that accepts multipart uploads
 ["/files" {:swagger {:tags ["files"]}}
     ["/upload"
      {:post {:summary    "upload a file"
@@ -89,15 +92,16 @@ You can see below an example of the implementation of a multipart parameter rout
                             :body   {:multipart multipart}})}}]]
 ```
 
-And then if you want to use it in a flow you can simply implement it like that:
+And then if you want to use it with the custom `clj-http-request!` fn in a flow, you can simply implement it like that:
 ```clojure
-;; inside a flow!
-(request! {:uri "/files/upload"
-                       :as :json
-                       :method :post
-                       :multipart [{:name "fiale" :content "Eggplants"}
-                                   {:name "file.jpg" :content (clojure.java.io/file "/Users/rafael.delboni/Downloads/images.jpg")}
-                                   {:name "file.csv" :content (clojure.java.io/file "/Users/rafael.delboni/Downloads/file.csv")}]})
+(flow "should accept multipart upload"
+    (match? {:status 200 :body any?}
+            (clj-http-request! {:uri "/files/upload"
+                                :as :json
+                                :method :post
+                                :multipart [{:name "fiale" :content "Eggplants"}
+                                            {:name "file.jpg" :content (clojure.java.io/file "/Users/rafael.delboni/Downloads/images.jpg")}
+                                            {:name "file.csv" :content (clojure.java.io/file "/Users/rafael.delboni/Downloads/file.csv")}]})))
 ```
 > In this example, we're handling multipart as some different files loaded from our disk, so remember to have these files correctly loaded!
 
