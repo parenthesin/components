@@ -71,47 +71,20 @@ Function to start / stop instrumentation as `clojure.test/use-fixtures`
 Wrapper over migratus to create an CLI based API.  
 Depends on aero and jdbc to read and connect to the database.
 
-# Projects using this library
-These projects are using the library, they can be used as templates or source of documentation of how use the components.
-- [parenthesin/microservice-boilerplate](https://github.com/parenthesin/microservice-boilerplate)
-- [parenthesin/microservice-boilerplate-malli](https://github.com/parenthesin/microservice-boilerplate-malli)
+# Documentation
+
+If you want to know more about the components in general and each component or helper implementation, check the [documentation](doc/intro.md).
+Contributions and suggestions are welcome.
 
 # Contributing
 
-## Tests
-To run unit tests inside `./test/unit`
-```bash
-clj -M:test :unit
-```
-To run integration tests inside `./test/integration`
-```bash
-clj -M:test :integration
-```
-To run all tests inside `./test`
-```bash
-clj -M:test
-```
-To generate a coverage report 
-```bash
-clj -M:test --plugin kaocha.plugin/cloverage
-```
+See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Lint and format
+# Projects using this library
 
-```bash
-clj -M:clojure-lsp format
-clj -M:clojure-lsp clean-ns
-clj -M:clojure-lsp diagnostics
-```
-
-## Build / Deploy
-
-```bash
-  # Build
-  clojure -T:build jar :version '"0.1.0"'
-  # Deploy
-  env CLOJARS_USERNAME=username CLOJARS_PASSWORD=clojars-token clojure -T:build deploy :version '"0.1.0"'
-```
+These projects are using the library, they can be used as templates or source of documentation of how use the components.
+- [parenthesin/microservice-boilerplate](https://github.com/parenthesin/microservice-boilerplate)
+- [parenthesin/microservice-boilerplate-malli](https://github.com/parenthesin/microservice-boilerplate-malli)
 
 # Features
 
@@ -139,14 +112,9 @@ clj -M:clojure-lsp diagnostics
 - [pg-embedded-clj](https://github.com/Bigsy/pg-embedded-clj) Embedded PostgreSQL for integration tests
 - [clojure-lsp](https://github.com/clojure-lsp/clojure-lsp/) Code Format, Namespace Check and Diagnosis
 
-# Documentation
-
-If you want to know more about the components in general and each component or helper implementation, check the [documentation](doc/intro.md).
-Contributions and suggestions are welcome.
-
 # License
 
-Copyright © 2023 Parenthesin
+Copyright © 2024 Parenthesin
 
 This is free and unencumbered software released into the public domain.
 For more information, please refer to http://unlicense.org
