@@ -50,7 +50,7 @@ Gets the web port from the config file [config file](test/resources/config.edn#L
 # Helpers
 
 ## [helpers/state-flow/server/pedestal](src/parenthesin/helpers/state_flow/server/pedestal.clj)
-Extract `io.pedestat.http/service-fn` from state-flow context and calls `io.pedestat.test/response-for` to simulate and http request on the system server.  
+Extract `io.pedestal.http/service-fn` from state-flow context and calls `io.pedestal.test/response-for` to simulate and http request on the system server.  
 *Check [system integration tests](./test/integration/parenthesin/schema/system_test.clj#L79) to see how to use this function.*
 
 ## [helpers/state-flow/db](src/parenthesin/helpers/state_flow/db.clj)
@@ -138,6 +138,11 @@ clj -M:clojure-lsp diagnostics
 - [matcher-combinators](https://github.com/nubank/matcher-combinators) Assertions in data structures
 - [pg-embedded-clj](https://github.com/Bigsy/pg-embedded-clj) Embedded PostgreSQL for integration tests
 - [clojure-lsp](https://github.com/clojure-lsp/clojure-lsp/) Code Format, Namespace Check and Diagnosis
+
+# Documentation
+
+If you want to know more about the components in general and each component or helper implementation, check the [documentation](doc/intro.md).
+Contributions and suggestions are welcome.
 
 # License
 
