@@ -9,7 +9,7 @@
 (defn stop! []
   (with-out-str (mi/unstrument!)))
 
-(defn with-intrumentation
+(defn with-instrumentation
   "Wraps f ensuring there has malli collect and instrument started before running it"
   [f]
   (start!)

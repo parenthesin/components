@@ -13,7 +13,7 @@
             [state-flow.assertions.matcher-combinators :refer [match?]]
             [state-flow.core :as state-flow :refer [flow]]))
 
-(use-fixtures :once helpers.malli/with-intrumentation)
+(use-fixtures :once helpers.malli/with-instrumentation)
 
 (def test-routes
   [["/plus"
