@@ -16,6 +16,7 @@
         metosin/reitit-pedestal {:mvn/version "0.7.2"}
         metosin/reitit-swagger {:mvn/version "0.7.2"}
         metosin/reitit-swagger-ui {:mvn/version "0.7.2"}
+        ring/ring-codec {:mvn/version "1.2.0"}
         migratus/migratus {:mvn/version "1.6.3"}
         org.slf4j/slf4j-simple {:mvn/version "2.0.17"}
         prismatic/schema {:mvn/version "1.4.1"}}
